@@ -1,0 +1,49 @@
+{
+  "input": {
+    "uri": "http://localhost:9200/customer/_search?pretty",
+    "body": {}
+  },
+  "output": {
+    "took": 3,
+    "timed_out": false,
+    "_shards": {
+      "total": 5,
+      "successful": 5,
+      "skipped": 0,
+      "failed": 0
+    },
+    "hits": {
+      "total": 3,
+      "max_score": 1.0,
+      "hits": [
+        {
+          "_index": "customer",
+          "_type": "_doc",
+          "_id": "GnIWoWgBr6KE9jZbc8sj",
+          "_score": 1.0,
+          "_source": {
+            "name": "Jane Doe"
+          }
+        },
+        {
+          "_index": "customer",
+          "_type": "_doc",
+          "_id": "1",
+          "_score": 1.0,
+          "_source": {
+            "name": "John Doe"
+          }
+        },
+        {
+          "_index": "customer",
+          "_type": "_doc",
+          "_id": "G3IXoWgBr6KE9jZbfcuW",
+          "_score": 1.0,
+          "_source": {
+            "name": "Jane Doe"
+          }
+        }
+      ]
+    }
+  }
+}

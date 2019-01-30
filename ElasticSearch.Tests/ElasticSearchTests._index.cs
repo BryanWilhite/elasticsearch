@@ -38,6 +38,31 @@ namespace ElasticSearch.Tests
         }
 
         /// <summary>
+        /// GETs all the customer documents with <c>_search</c>.
+        /// </summary>
+        /// <param name="ioFile"></param>
+        [Theory]
+        [ProjectFileData(typeof(ElasticSearchTests),
+            new[]
+            {
+                @"json\GetAllCustomers.json"
+            },
+            numberOfDirectoryLevels: 3)]
+        public async Task GetAllCustomers_Test(FileSystemInfo ioFile)
+        {
+            var j = GetIoJObject(ioFile);
+            var uri = GetInputUri(j["input"]["uri"]);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, uri);
+
+            var response = await GetServerResponseAsync(request);
+            j["output"] = JObject.Parse(response);
+
+            File.WriteAllText(ioFile.FullName, j.ToString());
+
+        }
+
+        /// <summary>
         /// GETs the customer index generated
         /// in <see cref="ElasticSearchTests.PutCustomerInNewIndex_Test(FileSystemInfo)"/>.
         /// </summary>
