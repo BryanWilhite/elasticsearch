@@ -1,0 +1,7 @@
+{
+  "input": {
+    "uri": "http://localhost:9200/_cat/indices?pretty",
+    "body": {}
+  },
+  "output": []
+}

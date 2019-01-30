@@ -54,5 +54,27 @@ namespace ElasticSearch.Tests
 
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
+
+        [Theory]
+        [ProjectFileData(typeof(ElasticSearchTests),
+            new[]
+            {
+                @"json\GetServerIndices_Test.json"
+            },
+            numberOfDirectoryLevels: 3)]
+        public async Task GetServerIndices_Test(FileSystemInfo ioFile)
+        {
+            var j = GetIoJObject(ioFile);
+            var uri = GetInputUri(j["input"]["uri"]);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, uri);
+            request.Headers.Clear();
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MimeTypes.ApplicationJson));
+
+            var response = await GetServerResponseAsync(request);
+            j["output"] = JArray.Parse(response);
+
+            File.WriteAllText(ioFile.FullName, j.ToString());
+        }
     }
 }
