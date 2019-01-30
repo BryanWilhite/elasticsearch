@@ -1,14 +1,14 @@
 {
   "input": {
-    "uri": "http://localhost:9200/customer/_doc/1?pretty",
+    "uri": "http://localhost:9200/customer/_doc?pretty",
     "body": {
-      "name": "John Doe"
+      "name": "Jane Doe"
     }
   },
   "output": {
     "_index": "customer",
     "_type": "_doc",
-    "_id": "1",
+    "_id": "G3IXoWgBr6KE9jZbfcuW",
     "_version": 1,
     "result": "created",
     "_shards": {

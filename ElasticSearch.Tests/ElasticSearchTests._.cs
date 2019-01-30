@@ -5,12 +5,15 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace ElasticSearch.Tests
 {
     public partial class ElasticSearchTests
     {
         static ElasticSearchTests() => HttpClient = new HttpClient();
+
+        public ElasticSearchTests(ITestOutputHelper testOutputHelper) => _testOutputHelper = testOutputHelper;
 
         [Theory]
         [ProjectFileData(typeof(ElasticSearchTests),
@@ -31,13 +34,14 @@ namespace ElasticSearch.Tests
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
 
-        private static async Task<string> GetServerResponseAsync(HttpRequestMessage request)
+        private async Task<string> GetServerResponseAsync(HttpRequestMessage request)
         {
             var response = await HttpClient.SendAsync(request);
+            var content = await response.Content.ReadAsStringAsync();
+
+            this._testOutputHelper.WriteLine(content);
 
             Assert.True(response.IsSuccessStatusCode, "The expected success code is not here.");
-
-            var content = await response.Content.ReadAsStringAsync();
             return content;
         }
 
@@ -56,5 +60,7 @@ namespace ElasticSearch.Tests
         }
 
         private static readonly HttpClient HttpClient;
+
+        private readonly ITestOutputHelper _testOutputHelper;
     }
 }
