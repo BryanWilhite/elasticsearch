@@ -3,13 +3,12 @@ using SonghayCore.xUnit;
 using System;
 using System.IO;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace ElasticSearch.Tests
 {
-    public class ElasticSearchTests
+    public partial class ElasticSearchTests
     {
         static ElasticSearchTests() => HttpClient = new HttpClient();
 
@@ -26,21 +25,20 @@ namespace ElasticSearch.Tests
             var uri = GetInputUri(j["input"]["uri"]);
 
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
+            var response = await GetServerResponseAsync(request);
+            j["output"] = JObject.Parse(response);
 
-            j["output"] = await GetServerResponseAsync(request);
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
 
-        private static async Task<JObject> GetServerResponseAsync(HttpRequestMessage request)
+        private static async Task<string> GetServerResponseAsync(HttpRequestMessage request)
         {
-
             var response = await HttpClient.SendAsync(request);
 
             Assert.True(response.IsSuccessStatusCode, "The expected success code is not here.");
 
             var content = await response.Content.ReadAsStringAsync();
-            return JObject.Parse(content);
-
+            return content;
         }
 
         private static Uri GetInputUri(JToken jToken)
