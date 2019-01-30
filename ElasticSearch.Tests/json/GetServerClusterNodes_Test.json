@@ -1,0 +1,20 @@
+{
+  "input": {
+    "uri": "http://localhost:9200/_cat/nodes?pretty",
+    "body": {}
+  },
+  "output": [
+    {
+      "ip": "127.0.0.1",
+      "heap.percent": "16",
+      "ram.percent": "65",
+      "cpu": "12",
+      "load_1m": null,
+      "load_5m": null,
+      "load_15m": null,
+      "node.role": "mdi",
+      "master": "*",
+      "name": "_RzHa2s"
+    }
+  ]
+}
