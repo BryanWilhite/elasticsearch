@@ -1,0 +1,23 @@
+{
+  "input": {
+    "uri": "http://localhost:9200/",
+    "body": {}
+  },
+  "output": {
+    "name": "_RzHa2s",
+    "cluster_name": "elasticsearch",
+    "cluster_uuid": "Qjz1mRRIS9uDLxtRK776Ug",
+    "version": {
+      "number": "6.6.0",
+      "build_flavor": "default",
+      "build_type": "zip",
+      "build_hash": "a9861f4",
+      "build_date": "2019-01-24T11:27:09.43974Z",
+      "build_snapshot": false,
+      "lucene_version": "7.6.0",
+      "minimum_wire_compatibility_version": "5.6.0",
+      "minimum_index_compatibility_version": "5.0.0"
+    },
+    "tagline": "You Know, for Search"
+  }
+}
