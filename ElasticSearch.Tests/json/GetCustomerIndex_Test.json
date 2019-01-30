@@ -1,0 +1,38 @@
+{
+  "input": {
+    "uri": "http://localhost:9200/customer",
+    "body": {}
+  },
+  "output": {
+    "customer": {
+      "aliases": {},
+      "mappings": {
+        "_doc": {
+          "properties": {
+            "name": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "index": {
+          "creation_date": "1548888110557",
+          "number_of_shards": "5",
+          "number_of_replicas": "1",
+          "uuid": "DlqP2bJPSeyFMtj6a6GHdg",
+          "version": {
+            "created": "6060099"
+          },
+          "provided_name": "customer"
+        }
+      }
+    }
+  }
+}

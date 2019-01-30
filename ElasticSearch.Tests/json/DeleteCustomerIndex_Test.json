@@ -1,0 +1,9 @@
+{
+  "input": {
+    "uri": "http://localhost:9200/customer",
+    "body": {}
+  },
+  "output": {
+    "acknowledged": true
+  }
+}
