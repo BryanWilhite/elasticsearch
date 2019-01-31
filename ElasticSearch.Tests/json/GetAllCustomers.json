@@ -4,7 +4,7 @@
     "body": {}
   },
   "output": {
-    "took": 3,
+    "took": 15,
     "timed_out": false,
     "_shards": {
       "total": 5,
@@ -31,7 +31,8 @@
           "_id": "1",
           "_score": 1.0,
           "_source": {
-            "name": "John Doe"
+            "name": "John Doe",
+            "age": 25
           }
         },
         {

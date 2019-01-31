@@ -1,0 +1,22 @@
+{
+  "input": {
+    "uri": "http://localhost:9200/customer/_doc/1/_update?pretty",
+    "body": {
+      "script": "ctx._source.age += 5"
+    }
+  },
+  "output": {
+    "_index": "customer",
+    "_type": "_doc",
+    "_id": "1",
+    "_version": 3,
+    "result": "updated",
+    "_shards": {
+      "total": 2,
+      "successful": 1,
+      "failed": 0
+    },
+    "_seq_no": 2,
+    "_primary_term": 1
+  }
+}
