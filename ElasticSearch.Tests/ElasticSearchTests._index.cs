@@ -37,6 +37,31 @@ namespace ElasticSearch.Tests
         }
 
         /// <summary>
+        /// DELETEs the customer index generated
+        /// in <see cref="ElasticSearchTests.PostCustomerIndexCopy_Test(FileSystemInfo)"/>.
+        /// </summary>
+        /// <param name="ioFile"></param>
+        [Theory]
+        [ProjectFileData(typeof(ElasticSearchTests),
+            new[]
+            {
+                @"json\DeleteCustomerIndexCopy_Test.json"
+            },
+            numberOfDirectoryLevels: 3)]
+        public async Task DeleteCustomerIndexCopy_Test(FileSystemInfo ioFile)
+        {
+            var j = GetIoJObject(ioFile);
+            var uri = GetInputUri(j["input"]["uri"]);
+
+            var request = new HttpRequestMessage(HttpMethod.Delete, uri);
+
+            var response = await GetServerResponseAsync(request);
+            j["output"] = JObject.Parse(response);
+
+            File.WriteAllText(ioFile.FullName, j.ToString());
+        }
+
+        /// <summary>
         /// GETs all the customer documents with <c>_search</c>.
         /// </summary>
         /// <param name="ioFile"></param>

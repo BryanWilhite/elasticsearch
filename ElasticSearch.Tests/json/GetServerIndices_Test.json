@@ -7,18 +7,6 @@
     {
       "health": "yellow",
       "status": "open",
-      "index": "customer_copy",
-      "uuid": "3C4vwWaUSIehA38e9vy4Cg",
-      "pri": "5",
-      "rep": "1",
-      "docs.count": "3",
-      "docs.deleted": "0",
-      "store.size": "10.8kb",
-      "pri.store.size": "10.8kb"
-    },
-    {
-      "health": "yellow",
-      "status": "open",
       "index": "customer",
       "uuid": "-I1YXbTnRW655MTFuXzJ9A",
       "pri": "5",
