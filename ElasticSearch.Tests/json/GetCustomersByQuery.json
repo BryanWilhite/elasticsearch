@@ -1,10 +1,16 @@
 {
   "input": {
     "uri": "http://localhost:9200/customer/_search?pretty",
-    "body": {}
+    "body": {
+      "query": {
+        "term": {
+          "name": "jane"
+        }
+      }
+    }
   },
   "output": {
-    "took": 17,
+    "took": 15,
     "timed_out": false,
     "_shards": {
       "total": 5,
@@ -13,35 +19,25 @@
       "failed": 0
     },
     "hits": {
-      "total": 3,
-      "max_score": 1.0,
+      "total": 2,
+      "max_score": 0.18232156,
       "hits": [
         {
           "_index": "customer",
           "_type": "_doc",
           "_id": "VEigv2gBEsBHQZrrR1xq",
-          "_score": 1.0,
+          "_score": 0.18232156,
           "_source": {
-            "name": "Jane Q. Doe"
+            "name": "Jane Doe"
           }
         },
         {
           "_index": "customer",
           "_type": "_doc",
           "_id": "VUigv2gBEsBHQZrrXFzb",
-          "_score": 1.0,
+          "_score": 0.18232156,
           "_source": {
-            "name": "Jane Q. Doe"
-          }
-        },
-        {
-          "_index": "customer",
-          "_type": "_doc",
-          "_id": "1",
-          "_score": 1.0,
-          "_source": {
-            "name": "John Doe",
-            "age": 20
+            "name": "Jane Doe"
           }
         }
       ]

@@ -8,13 +8,13 @@
       "health": "yellow",
       "status": "open",
       "index": "customer",
-      "uuid": "-I1YXbTnRW655MTFuXzJ9A",
+      "uuid": "qsbLcKzAQEKtOEkxuDGisA",
       "pri": "5",
       "rep": "1",
       "docs.count": "3",
       "docs.deleted": "0",
-      "store.size": "11.2kb",
-      "pri.store.size": "11.2kb"
+      "store.size": "11kb",
+      "pri.store.size": "11kb"
     }
   ]
 }

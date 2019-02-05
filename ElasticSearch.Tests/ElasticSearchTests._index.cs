@@ -112,6 +112,42 @@ namespace ElasticSearch.Tests
         }
 
         /// <summary>
+        /// GETs customer data by query from the index generated
+        /// in <see cref="ElasticSearchTests.PutCustomerInNewIndex_Test(FileSystemInfo)"/>.
+        /// Depends on data from <see cref="ElasticSearchTests.PostCustomer_Test(FileSystemInfo)"/>.
+        /// </summary>
+        /// <param name="ioFile"></param>
+        /// <remarks>
+        /// This operation will work as expected for POST or GET methods.
+        /// This operation will work as expected for <c>customer/_search</c> or just <c>_search</c>.
+        /// The query is a lowercase term because text fields are analyzed
+        /// (see https://www.elastic.co/guide/en/elasticsearch/reference/6.6/query-dsl-term-query.html).
+        /// For example the term <c>Jane</c> will return no documents while <c>jane</c> will.
+        /// </remarks>
+        [Theory]
+        [ProjectFileData(typeof(ElasticSearchTests),
+            new[]
+            {
+                @"json\GetCustomersByQuery.json"
+            },
+            numberOfDirectoryLevels: 3)]
+        public async Task GetCustomersByQuery(FileSystemInfo ioFile)
+        {
+            var j = GetIoJObject(ioFile);
+            var uri = GetInputUri(j["input"]["uri"]);
+            var body = JObject.FromObject(j["input"]["body"]);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, uri);
+            request.Headers.Clear();
+            request.Content = new StringContent(body.ToString(), Encoding.UTF8, MimeTypes.ApplicationJson);
+
+            var response = await GetServerResponseAsync(request);
+            j["output"] = JObject.Parse(response);
+
+            File.WriteAllText(ioFile.FullName, j.ToString());
+        }
+
+        /// <summary>
         /// POSTs a request for a copy of the index generated (with <c>_reindex</c>)
         /// in <see cref="ElasticSearchTests.PutCustomerInNewIndex_Test(FileSystemInfo)"/>.
         /// </summary>

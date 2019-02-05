@@ -46,6 +46,9 @@ namespace ElasticSearch.Tests
         /// in <see cref="ElasticSearchTests.PutCustomerInNewIndex_Test(FileSystemInfo)"/>.
         /// </summary>
         /// <param name="ioFile"></param>
+        /// <remarks>
+        /// This operation uses <c>refresh=wait_for</c> to ensure that the caller waits for the index to refresh after the update.
+        /// </remarks>
         [Theory]
         [ProjectFileData(typeof(ElasticSearchTests),
             new[]
@@ -83,6 +86,38 @@ namespace ElasticSearch.Tests
             },
             numberOfDirectoryLevels: 3)]
         public async Task PostCustomerPainlessById_Test(FileSystemInfo ioFile)
+        {
+            var j = GetIoJObject(ioFile);
+            var uri = GetInputUri(j["input"]["uri"]);
+            var body = JObject.FromObject(j["input"]["body"]);
+
+            var request = new HttpRequestMessage(HttpMethod.Post, uri);
+            request.Headers.Clear();
+            request.Content = new StringContent(body.ToString(), Encoding.UTF8, MimeTypes.ApplicationJson);
+
+            var response = await GetServerResponseAsync(request);
+            j["output"] = JObject.Parse(response);
+
+            File.WriteAllText(ioFile.FullName, j.ToString());
+        }
+
+        /// <summary>
+        /// POSTs an update by query for the data generated
+        /// by <see cref="ElasticSearchTests.PostCustomer_Test(FileSystemInfo)"/>.
+        /// with a painless script.
+        /// </summary>
+        /// <param name="ioFile"></param>
+        /// <remarks>
+        /// This operation uses <c>refresh=true</c> to ensure that the caller waits for the index to refresh after the update.
+        /// </remarks>
+        [Theory]
+        [ProjectFileData(typeof(ElasticSearchTests),
+            new[]
+            {
+                @"json\PostCustomerUpdateByQuery_Test.json"
+            },
+            numberOfDirectoryLevels: 3)]
+        public async Task PostCustomerUpdateByQuery_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
             var uri = GetInputUri(j["input"]["uri"]);
