@@ -16,20 +16,34 @@ Add `elasticsearch-6.6.0/bin` to `PATH` and run `elasticsearch`. By the current 
 
 ```json
 {
-name: "_RzHa2s",
-cluster_name: "elasticsearch",
-cluster_uuid: "Qjz1mRRIS9uDLxtRK776Ug",
-version: {
-number: "6.6.0",
-build_flavor: "default",
-build_type: "zip",
-build_hash: "a9861f4",
-build_date: "2019-01-24T11:27:09.439740Z",
-build_snapshot: false,
-lucene_version: "7.6.0",
-minimum_wire_compatibility_version: "5.6.0",
-minimum_index_compatibility_version: "5.0.0"
-},
-tagline: "You Know, for Search"
+    "name": "_RzHa2s",
+    "cluster_name": "elasticsearch",
+    "cluster_uuid": "Qjz1mRRIS9uDLxtRK776Ug",
+    "version": {
+        "number": "6.6.0",
+        "build_flavor": "default",
+        "build_type": "zip",
+        "build_hash": "a9861f4",
+        "build_date": "2019-01-24T11:27:09.439740Z",
+        "build_snapshot": false,
+        "lucene_version": "7.6.0",
+        "minimum_wire_compatibility_version": "5.6.0",
+        "minimum_index_compatibility_version": "5.0.0"
+    },
+    "tagline": "You Know, for Search"
 }
 ```
+
+## Elasticsearch is explored through tests
+
+The [Getting Started](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html) section of the Elasticsearch documentation is the guide that produces the [tests](ElasticSearch.Tests) in this repo. Here is a rough sketch of the order of tests:
+
+1. `GetServerInfo_Test` [[GitHub](https://github.com/BryanWilhite/elasticsearch/blob/master/ElasticSearch.Tests/ElasticSearchTests._.cs#L25)]: verifies the installation
+2. `GetServerHealth_Test` [[GitHub](https://github.com/BryanWilhite/elasticsearch/blob/master/ElasticSearch.Tests/ElasticSearchTests._cat.cs#L43)]: displays the status of the health of the installation
+3. `GetServerClusterNodes_Test` [[GitHub](https://github.com/BryanWilhite/elasticsearch/blob/master/ElasticSearch.Tests/ElasticSearchTests._cat.cs#L21)]: shows the status of the default cluster node of the installation
+4. `GetServerIndices_Test` [[GitHub](https://github.com/BryanWilhite/elasticsearch/blob/master/ElasticSearch.Tests/ElasticSearchTests._cat.cs#L65)]: lists the indices of the node (should return none after install)
+5. `PutCustomerInNewIndex_Test` [[GitHub](https://github.com/BryanWilhite/elasticsearch/blob/master/ElasticSearch.Tests/ElasticSearchTests._index.cs#L193)]: PUTs (inserts) a new document into an index, generated automatically
+
+Most of the tests come with comments that go into detail (beyond the official documentation) and refer to any dependencies on other tests.
+
+@[BryanWilhite](https://twitter.com/BryanWilhite)
