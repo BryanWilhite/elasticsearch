@@ -4,17 +4,17 @@
     "body": {}
   },
   "output": {
-    "name": "_RzHa2s",
+    "name": "R9ZQhSY",
     "cluster_name": "elasticsearch",
-    "cluster_uuid": "Qjz1mRRIS9uDLxtRK776Ug",
+    "cluster_uuid": "tGmB08r3QqSUDFzVEi6VrA",
     "version": {
-      "number": "6.6.0",
-      "build_flavor": "default",
-      "build_type": "zip",
-      "build_hash": "a9861f4",
-      "build_date": "2019-01-24T11:27:09.43974Z",
+      "number": "6.7.1",
+      "build_flavor": "oss",
+      "build_type": "deb",
+      "build_hash": "2f32220",
+      "build_date": "2019-04-02T15:59:27.961366Z",
       "build_snapshot": false,
-      "lucene_version": "7.6.0",
+      "lucene_version": "7.7.0",
       "minimum_wire_compatibility_version": "5.6.0",
       "minimum_index_compatibility_version": "5.0.0"
     },

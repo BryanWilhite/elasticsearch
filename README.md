@@ -34,6 +34,82 @@ Add `elasticsearch-6.6.0/bin` to `PATH` and run `elasticsearch`. By the current 
 }
 ```
 
+## Windows install, bash flavored
+
+In case frustration is found with my previous installation approach, you can get into more trouble by not only installing Elasticsearch in the Windows Subsystem for Linux but also using the Amazon-backed [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch/) as well😬. There is documentation for [the Debian installation process](https://opendistro.github.io/for-elasticsearch-docs/docs/install/deb/) and my variation below is only slightly different:
+
+```console
+sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt update
+sudo apt install openjdk-11-jdk
+```
+
+Ensure that `JAVA_HOME` is set by editing `/etc/environment` with a line like:
+
+```plaintext
+JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
+```
+
+where `java-11-openjdk-amd64` is a symlink.
+
+```console
+wget -qO - https://d3g5vo6xdbdb9a.cloudfront.net/GPG-KEY-opendistroforelasticsearch | sudo apt-key add -
+
+echo "deb https://d3g5vo6xdbdb9a.cloudfront.net/apt stable main" | sudo tee -a   /etc/apt/sources.list.d/opendistroforelasticsearch.list
+
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-6.7.1.deb
+sudo dpkg  -i elasticsearch-oss-6.7.1.deb
+
+sudo apt-get update
+sudo apt install opendistroforelasticsearch
+```
+
+Disable _all_ security on the server by editing `/etc/elasticsearch/elasticsearch.yml` with these two lines:
+
+```plaintext
+opendistro_security.ssl.http.enabled: false
+…
+opendistro_security.disabled: true
+```
+
+For more detail, see “[Disable security](https://opendistro.github.io/for-elasticsearch-docs/docs/security/disable/).”📚
+
+Finally, because `systemctl` is not really a thing in Windows bash, control the `elasticsearch` service with these:
+
+```console
+sudo /etc/init.d/elasticsearch restart
+sudo /etc/init.d/elasticsearch stop
+sudo /etc/init.d/elasticsearch start
+```
+
+Verify that the server is running (and unsecured) with this command:
+
+```console
+curl -XGET http://localhost:9200
+```
+
+It should return something like this:
+
+```json
+{
+  "name" : "R9ZQhSY",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "tGmB08r3QqSUDFzVEi6VrA",
+  "version" : {
+    "number" : "6.7.1",
+    "build_flavor" : "oss",
+    "build_type" : "deb",
+    "build_hash" : "2f32220",
+    "build_date" : "2019-04-02T15:59:27.961366Z",
+    "build_snapshot" : false,
+    "lucene_version" : "7.7.0",
+    "minimum_wire_compatibility_version" : "5.6.0",
+    "minimum_index_compatibility_version" : "5.0.0"
+  },
+  "tagline" : "You Know, for Search"
+}
+```
+
 ## Elasticsearch is explored through tests
 
 The [Getting Started](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html) section of the Elasticsearch documentation is the guide that produces the [tests](ElasticSearch.Tests) in this repo. Here is a rough sketch of the order of tests:
