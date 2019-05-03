@@ -50,7 +50,7 @@ Ensure that `JAVA_HOME` is set by editing `/etc/environment` with a line like:
 JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
 ```
 
-where `java-11-openjdk-amd64` is a symlink.
+where `java-11-openjdk-amd64` is a symlink. For more detail, see “[How to set JAVA_HOME for Java?](https://askubuntu.com/questions/175514/how-to-set-java-home-for-java).”📚
 
 ```console
 wget -qO - https://d3g5vo6xdbdb9a.cloudfront.net/GPG-KEY-opendistroforelasticsearch | sudo apt-key add -
