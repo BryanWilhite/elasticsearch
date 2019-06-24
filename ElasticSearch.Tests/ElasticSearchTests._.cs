@@ -1,9 +1,9 @@
 using Newtonsoft.Json.Linq;
-using SonghayCore.xUnit;
 using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Songhay.Tests;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -16,12 +16,7 @@ namespace ElasticSearch.Tests
         public ElasticSearchTests(ITestOutputHelper testOutputHelper) => _testOutputHelper = testOutputHelper;
 
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests),
-            new[]
-            {
-                @"json\GetServerInfo_Test.json"
-            },
-            numberOfDirectoryLevels: 3)]
+        [ProjectFileData(typeof(ElasticSearchTests),@"json\GetServerInfo_Test.json")]
         public async Task GetServerInfo_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);

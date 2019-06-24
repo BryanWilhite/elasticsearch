@@ -1,10 +1,10 @@
 using Newtonsoft.Json.Linq;
 using Songhay.Models;
-using SonghayCore.xUnit;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Songhay.Tests;
 using Xunit;
 
 namespace ElasticSearch.Tests
@@ -12,12 +12,7 @@ namespace ElasticSearch.Tests
     public partial class ElasticSearchTests
     {
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests),
-            new[]
-            {
-                @"json\GetServerClusterNodes_Test.json"
-            },
-            numberOfDirectoryLevels: 3)]
+        [ProjectFileData(typeof(ElasticSearchTests), @"json\GetServerClusterNodes_Test.json")]
         public async Task GetServerClusterNodes_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
@@ -34,12 +29,7 @@ namespace ElasticSearch.Tests
         }
 
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests),
-            new[]
-            {
-                @"json\GetServerHealth_Test.json"
-            },
-            numberOfDirectoryLevels: 3)]
+        [ProjectFileData(typeof(ElasticSearchTests), @"json\GetServerHealth_Test.json")]
         public async Task GetServerHealth_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
@@ -56,12 +46,7 @@ namespace ElasticSearch.Tests
         }
 
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests),
-            new[]
-            {
-                @"json\GetServerIndices_Test.json"
-            },
-            numberOfDirectoryLevels: 3)]
+        [ProjectFileData(typeof(ElasticSearchTests), @"json\GetServerIndices_Test.json")]
         public async Task GetServerIndices_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
