@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Songhay.Tests;
 using Xunit;
+using ElasticSearch.Tests.Extensions;
 
 namespace ElasticSearch.Tests
 {
@@ -15,51 +16,33 @@ namespace ElasticSearch.Tests
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetServerClusterNodes_Test.json")]
         public async Task GetServerClusterNodes_Test(FileSystemInfo ioFile)
         {
-            var j = GetIoJObject(ioFile);
-            var uri = GetInputUri(j["input"]["uri"]);
+            var j = await ioFile.GetServerResponseWithJsonAcceptHeaderAsync();
+            var content = j.ToString();
+            this._testOutputHelper.WriteLine(content);
 
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
-            request.Headers.Clear();
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MimeTypes.ApplicationJson));
-
-            var response = await GetServerResponseAsync(request);
-            j["output"] = JArray.Parse(response);
-
-            File.WriteAllText(ioFile.FullName, j.ToString());
+            File.WriteAllText(ioFile.FullName, content);
         }
 
         [Theory]
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetServerHealth_Test.json")]
         public async Task GetServerHealth_Test(FileSystemInfo ioFile)
         {
-            var j = GetIoJObject(ioFile);
-            var uri = GetInputUri(j["input"]["uri"]);
+            var j = await ioFile.GetServerResponseWithJsonAcceptHeaderAsync();
+            var content = j.ToString();
+            this._testOutputHelper.WriteLine(content);
 
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
-            request.Headers.Clear();
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MimeTypes.ApplicationJson));
-
-            var response = await GetServerResponseAsync(request);
-            j["output"] = JArray.Parse(response);
-
-            File.WriteAllText(ioFile.FullName, j.ToString());
+            File.WriteAllText(ioFile.FullName, content);
         }
 
         [Theory]
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetServerIndices_Test.json")]
         public async Task GetServerIndices_Test(FileSystemInfo ioFile)
         {
-            var j = GetIoJObject(ioFile);
-            var uri = GetInputUri(j["input"]["uri"]);
+            var j = await ioFile.GetServerResponseWithJsonAcceptHeaderAsync();
+            var content = j.ToString();
+            this._testOutputHelper.WriteLine(content);
 
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
-            request.Headers.Clear();
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MimeTypes.ApplicationJson));
-
-            var response = await GetServerResponseAsync(request);
-            j["output"] = JArray.Parse(response);
-
-            File.WriteAllText(ioFile.FullName, j.ToString());
+            File.WriteAllText(ioFile.FullName, content);
         }
     }
 }

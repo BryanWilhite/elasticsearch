@@ -4,44 +4,28 @@
     "body": {}
   },
   "output": {
-    "took": 17,
+    "took": 190,
     "timed_out": false,
     "_shards": {
-      "total": 5,
-      "successful": 5,
+      "total": 1,
+      "successful": 1,
       "skipped": 0,
       "failed": 0
     },
     "hits": {
-      "total": 3,
+      "total": {
+        "value": 1,
+        "relation": "eq"
+      },
       "max_score": 1.0,
       "hits": [
-        {
-          "_index": "customer",
-          "_type": "_doc",
-          "_id": "VEigv2gBEsBHQZrrR1xq",
-          "_score": 1.0,
-          "_source": {
-            "name": "Jane Q. Doe"
-          }
-        },
-        {
-          "_index": "customer",
-          "_type": "_doc",
-          "_id": "VUigv2gBEsBHQZrrXFzb",
-          "_score": 1.0,
-          "_source": {
-            "name": "Jane Q. Doe"
-          }
-        },
         {
           "_index": "customer",
           "_type": "_doc",
           "_id": "1",
           "_score": 1.0,
           "_source": {
-            "name": "John Doe",
-            "age": 20
+            "name": "John Doe"
           }
         }
       ]

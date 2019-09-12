@@ -1,9 +1,7 @@
-using Newtonsoft.Json.Linq;
-using Songhay.Models;
+using ElasticSearch.Tests.Extensions;
 using Songhay.Tests;
 using System.IO;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -20,14 +18,7 @@ namespace ElasticSearch.Tests
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\DeleteCustomerIndex_Test.json")]
         public async Task DeleteCustomerIndex_Test(FileSystemInfo ioFile)
         {
-            var j = GetIoJObject(ioFile);
-            var uri = GetInputUri(j["input"]["uri"]);
-
-            var request = new HttpRequestMessage(HttpMethod.Delete, uri);
-
-            var response = await GetServerResponseAsync(request);
-            j["output"] = JObject.Parse(response);
-
+            var j = await ioFile.ReturnServerResponseAsync(HttpMethod.Delete);
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
 
@@ -40,14 +31,7 @@ namespace ElasticSearch.Tests
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\DeleteCustomerIndexCopy_Test.json")]
         public async Task DeleteCustomerIndexCopy_Test(FileSystemInfo ioFile)
         {
-            var j = GetIoJObject(ioFile);
-            var uri = GetInputUri(j["input"]["uri"]);
-
-            var request = new HttpRequestMessage(HttpMethod.Delete, uri);
-
-            var response = await GetServerResponseAsync(request);
-            j["output"] = JObject.Parse(response);
-
+            var j = await ioFile.ReturnServerResponseAsync(HttpMethod.Delete);
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
 
@@ -59,16 +43,8 @@ namespace ElasticSearch.Tests
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetAllCustomers.json")]
         public async Task GetAllCustomers_Test(FileSystemInfo ioFile)
         {
-            var j = GetIoJObject(ioFile);
-            var uri = GetInputUri(j["input"]["uri"]);
-
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
-
-            var response = await GetServerResponseAsync(request);
-            j["output"] = JObject.Parse(response);
-
+            var j = await ioFile.ReturnServerResponseAsync(HttpMethod.Get);
             File.WriteAllText(ioFile.FullName, j.ToString());
-
         }
 
         /// <summary>
@@ -80,14 +56,7 @@ namespace ElasticSearch.Tests
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetCustomerIndex_Test.json")]
         public async Task GetCustomerIndex_Test(FileSystemInfo ioFile)
         {
-            var j = GetIoJObject(ioFile);
-            var uri = GetInputUri(j["input"]["uri"]);
-
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
-
-            var response = await GetServerResponseAsync(request);
-            j["output"] = JObject.Parse(response);
-
+            var j = await ioFile.ReturnServerResponseAsync(HttpMethod.Get);
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
 
@@ -108,17 +77,7 @@ namespace ElasticSearch.Tests
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetCustomersByQuery.json")]
         public async Task GetCustomersByQuery(FileSystemInfo ioFile)
         {
-            var j = GetIoJObject(ioFile);
-            var uri = GetInputUri(j["input"]["uri"]);
-            var body = JObject.FromObject(j["input"]["body"]);
-
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
-            request.Headers.Clear();
-            request.Content = new StringContent(body.ToString(), Encoding.UTF8, MimeTypes.ApplicationJson);
-
-            var response = await GetServerResponseAsync(request);
-            j["output"] = JObject.Parse(response);
-
+            var j = await ioFile.ReturnServerResponseFromBodyAsync(HttpMethod.Get);
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
 
@@ -131,17 +90,7 @@ namespace ElasticSearch.Tests
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PostCustomerIndexCopy_Test.json")]
         public async Task PostCustomerIndexCopy_Test(FileSystemInfo ioFile)
         {
-            var j = GetIoJObject(ioFile);
-            var uri = GetInputUri(j["input"]["uri"]);
-            var body = JObject.FromObject(j["input"]["body"]);
-
-            var request = new HttpRequestMessage(HttpMethod.Post, uri);
-            request.Headers.Clear();
-            request.Content = new StringContent(body.ToString(), Encoding.UTF8, MimeTypes.ApplicationJson);
-
-            var response = await GetServerResponseAsync(request);
-            j["output"] = JObject.Parse(response);
-
+            var j = await ioFile.ReturnServerResponseFromBodyAsync(HttpMethod.Post);
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
 
@@ -157,17 +106,7 @@ namespace ElasticSearch.Tests
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PutCustomerInNewIndex_Test.json")]
         public async Task PutCustomerInNewIndex_Test(FileSystemInfo ioFile)
         {
-            var j = GetIoJObject(ioFile);
-            var uri = GetInputUri(j["input"]["uri"]);
-            var body = JObject.FromObject(j["input"]["body"]);
-
-            var request = new HttpRequestMessage(HttpMethod.Put, uri);
-            request.Headers.Clear();
-            request.Content = new StringContent(body.ToString(), Encoding.UTF8, MimeTypes.ApplicationJson);
-
-            var response = await GetServerResponseAsync(request);
-            j["output"] = JObject.Parse(response);
-
+            var j = await ioFile.ReturnServerResponseAsync(HttpMethod.Put);
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Songhay.Tests;
 using Xunit;
 using Xunit.Abstractions;
+using ElasticSearch.Tests.Extensions;
 
 namespace ElasticSearch.Tests
 {
@@ -19,14 +20,11 @@ namespace ElasticSearch.Tests
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetServerInfo_Test.json")]
         public async Task GetServerInfo_Test(FileSystemInfo ioFile)
         {
-            var j = GetIoJObject(ioFile);
-            var uri = GetInputUri(j["input"]["uri"]);
+            var j = await ioFile.ReturnServerResponseAsync(HttpMethod.Get);
+            var content = j.ToString();
+            this._testOutputHelper.WriteLine(content);
 
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
-            var response = await GetServerResponseAsync(request);
-            j["output"] = JObject.Parse(response);
-
-            File.WriteAllText(ioFile.FullName, j.ToString());
+            File.WriteAllText(ioFile.FullName, content);
         }
 
         private async Task<string> GetServerResponseAsync(HttpRequestMessage request)
@@ -46,12 +44,6 @@ namespace ElasticSearch.Tests
             Assert.False(string.IsNullOrEmpty(input), "The expected input URI is not here.");
 
             return new Uri(input, UriKind.Absolute);
-        }
-
-        private static JObject GetIoJObject(FileSystemInfo ioFile)
-        {
-            var json = File.ReadAllText(ioFile.FullName);
-            return JObject.Parse(json);
         }
 
         private static readonly HttpClient HttpClient;
