@@ -5,16 +5,16 @@
   },
   "output": [
     {
-      "health": "yellow",
+      "health": "green",
       "status": "open",
-      "index": "customer",
-      "uuid": "qsbLcKzAQEKtOEkxuDGisA",
-      "pri": "5",
-      "rep": "1",
-      "docs.count": "3",
+      "index": ".opendistro_security",
+      "uuid": "oHGvqM4nTiWaw2AL_b3JcA",
+      "pri": "1",
+      "rep": "0",
+      "docs.count": "6",
       "docs.deleted": "0",
-      "store.size": "11kb",
-      "pri.store.size": "11kb"
+      "store.size": "32.7kb",
+      "pri.store.size": "32.7kb"
     }
   ]
 }

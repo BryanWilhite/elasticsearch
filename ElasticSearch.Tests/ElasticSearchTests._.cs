@@ -16,7 +16,7 @@ namespace ElasticSearch.Tests
         public ElasticSearchTests(ITestOutputHelper testOutputHelper) => _testOutputHelper = testOutputHelper;
 
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests),@"json\GetServerInfo_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetServerInfo_Test.json")]
         public async Task GetServerInfo_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);

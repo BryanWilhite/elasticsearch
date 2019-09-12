@@ -17,7 +17,7 @@ namespace ElasticSearch.Tests
         /// </summary>
         /// <param name="ioFile"></param>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"json\DeleteCustomerIndex_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\DeleteCustomerIndex_Test.json")]
         public async Task DeleteCustomerIndex_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
@@ -37,7 +37,7 @@ namespace ElasticSearch.Tests
         /// </summary>
         /// <param name="ioFile"></param>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"json\DeleteCustomerIndexCopy_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\DeleteCustomerIndexCopy_Test.json")]
         public async Task DeleteCustomerIndexCopy_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
@@ -56,7 +56,7 @@ namespace ElasticSearch.Tests
         /// </summary>
         /// <param name="ioFile"></param>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"json\GetAllCustomers.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetAllCustomers.json")]
         public async Task GetAllCustomers_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
@@ -77,7 +77,7 @@ namespace ElasticSearch.Tests
         /// </summary>
         /// <param name="ioFile"></param>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"json\GetCustomerIndex_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetCustomerIndex_Test.json")]
         public async Task GetCustomerIndex_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
@@ -105,7 +105,7 @@ namespace ElasticSearch.Tests
         /// For example the term <c>Jane</c> will return no documents while <c>jane</c> will.
         /// </remarks>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"json\GetCustomersByQuery.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetCustomersByQuery.json")]
         public async Task GetCustomersByQuery(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
@@ -128,7 +128,7 @@ namespace ElasticSearch.Tests
         /// </summary>
         /// <param name="ioFile"></param>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"json\PostCustomerIndexCopy_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PostCustomerIndexCopy_Test.json")]
         public async Task PostCustomerIndexCopy_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
@@ -154,7 +154,7 @@ namespace ElasticSearch.Tests
         /// This is because an ID is specified in the URI.
         /// </remarks>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"json\PutCustomerInNewIndex_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PutCustomerInNewIndex_Test.json")]
         public async Task PutCustomerInNewIndex_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);

@@ -6,15 +6,15 @@
   "output": [
     {
       "ip": "127.0.0.1",
-      "heap.percent": "16",
-      "ram.percent": "65",
-      "cpu": "12",
-      "load_1m": null,
-      "load_5m": null,
-      "load_15m": null,
+      "heap.percent": "10",
+      "ram.percent": "97",
+      "cpu": "41",
+      "load_1m": "0.80",
+      "load_5m": "0.77",
+      "load_15m": "0.74",
       "node.role": "mdi",
       "master": "*",
-      "name": "_RzHa2s"
+      "name": "bw-ubuntu-vm"
     }
   ]
 }

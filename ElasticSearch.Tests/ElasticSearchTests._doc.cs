@@ -19,7 +19,7 @@ namespace ElasticSearch.Tests
         /// Running this POST repeatedly will add multiple documents with auto-generated IDs.
         /// </remarks>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"json\PostCustomer_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PostCustomer_Test.json")]
         public async Task PostCustomer_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
@@ -45,7 +45,7 @@ namespace ElasticSearch.Tests
         /// This operation uses <c>refresh=wait_for</c> to ensure that the caller waits for the index to refresh after the update.
         /// </remarks>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"json\PostCustomerById_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PostCustomerById_Test.json")]
         public async Task PostCustomerById_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
@@ -69,7 +69,7 @@ namespace ElasticSearch.Tests
         /// </summary>
         /// <param name="ioFile"></param>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"json\PostCustomerPainlessById_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PostCustomerPainlessById_Test.json")]
         public async Task PostCustomerPainlessById_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
@@ -96,7 +96,7 @@ namespace ElasticSearch.Tests
         /// This operation uses <c>refresh=true</c> to ensure that the caller waits for the index to refresh after the update.
         /// </remarks>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"json\PostCustomerUpdateByQuery_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PostCustomerUpdateByQuery_Test.json")]
         public async Task PostCustomerUpdateByQuery_Test(FileSystemInfo ioFile)
         {
             var j = GetIoJObject(ioFile);
