@@ -36,7 +36,7 @@ Add `elasticsearch-6.6.0/bin` to `PATH` and run `elasticsearch`. By the current 
 
 ## Windows install, bash flavored
 
-In case frustration is found with my previous installation approach, you can get into more trouble by not only installing Elasticsearch in the Windows Subsystem for Linux but also using the Amazon-backed [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch/) as well😬. There is documentation for [the Debian installation process](https://opendistro.github.io/for-elasticsearch-docs/docs/install/deb/) and my variation below is only slightly different:
+In case frustration is found with my previous installation approach, you can get into more trouble by not only installing Elasticsearch in the Windows Subsystem for Linux but also using the Amazon-backed [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch/) as well😬. There is documentation for [the Debian installation process](https://opendistro.github.io/for-elasticsearch-docs/docs/install/deb/) and my variation for version 7.1.1 is only slightly different:
 
 ```console
 sudo add-apt-repository ppa:openjdk-r/ppa
@@ -57,8 +57,8 @@ wget -qO - https://d3g5vo6xdbdb9a.cloudfront.net/GPG-KEY-opendistroforelasticsea
 
 echo "deb https://d3g5vo6xdbdb9a.cloudfront.net/apt stable main" | sudo tee -a   /etc/apt/sources.list.d/opendistroforelasticsearch.list
 
-wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-6.7.1.deb
-sudo dpkg  -i elasticsearch-oss-6.7.1.deb
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.1.1-amd64.deb
+sudo dpkg -i elasticsearch-oss-7.1.1-amd64.deb
 
 sudo apt-get update
 sudo apt install opendistroforelasticsearch
@@ -82,32 +82,20 @@ sudo /etc/init.d/elasticsearch stop
 sudo /etc/init.d/elasticsearch start
 ```
 
-Verify that the server is running (and unsecured) with this command:
+—otherwise, for Linux:
 
 ```console
-curl -XGET http://localhost:9200
+sudo systemctl start elasticsearch.service
+systemctl status elasticsearch.service
+sudo systemctl stop elasticsearch.service
 ```
 
-It should return something like this:
+Verify that the server is running (and unsecured) with these commands:
 
-```json
-{
-  "name" : "R9ZQhSY",
-  "cluster_name" : "elasticsearch",
-  "cluster_uuid" : "tGmB08r3QqSUDFzVEi6VrA",
-  "version" : {
-    "number" : "6.7.1",
-    "build_flavor" : "oss",
-    "build_type" : "deb",
-    "build_hash" : "2f32220",
-    "build_date" : "2019-04-02T15:59:27.961366Z",
-    "build_snapshot" : false,
-    "lucene_version" : "7.7.0",
-    "minimum_wire_compatibility_version" : "5.6.0",
-    "minimum_index_compatibility_version" : "5.0.0"
-  },
-  "tagline" : "You Know, for Search"
-}
+```console
+curl -XGET https://localhost:9200 -u admin:admin --insecure
+curl -XGET https://localhost:9200/_cat/nodes?v -u admin:admin --insecure
+curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
 ```
 
 ## Elasticsearch is explored through tests
