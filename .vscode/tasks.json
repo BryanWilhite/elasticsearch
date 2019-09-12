@@ -1,0 +1,52 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ElasticSearch.Tests/ElasticSearch.Tests.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test [ElasticSearch.Tests, filtered by selected text]",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "test",
+                "${workspaceFolder}/ElasticSearch.Tests/ElasticSearch.Tests.csproj",
+                "--filter:${selectedText}",
+                "--logger:trx",
+                "--results-directory:${workspaceFolder}/TestResults",
+                "--verbosity:normal"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test [clean test output folder]",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/shell/TestResults"
+            },
+            "linux": {
+                "command": "rm",
+                "args": [
+                    "--verbose",
+                    "*.trx"
+                ]
+            },
+            "windows": {
+                "command": "Remove-Item",
+                "args": [
+                    "-Path",
+                    "*.trx",
+                    "-Verbose"
+                ]
+            },
+            "problemMatcher": []
+        }
+	]
+}
