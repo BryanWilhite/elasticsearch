@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "dotnet: build",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -12,7 +12,17 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "test [ElasticSearch.Tests, filtered by selected text]",
+            "label": "dotnet: outdated with auto upgrade",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "outdated",
+                "--upgrade"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "dotnet: test [ElasticSearch.Tests, filtered by selected text]",
             "command": "dotnet",
             "type": "shell",
             "args": [
@@ -26,7 +36,7 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "test [clean test output folder]",
+            "label": "dotnet: test [clean test output folder]",
             "type": "shell",
             "options": {
                 "cwd": "${workspaceFolder}/shell/TestResults"
