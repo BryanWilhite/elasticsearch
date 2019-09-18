@@ -110,4 +110,11 @@ The [Getting Started](https://www.elastic.co/guide/en/elasticsearch/reference/cu
 
 Most of the tests come with comments that go into detail (beyond the official documentation) and refer to any dependencies on other tests.
 
+## the `unmet dependencies` error
+
+The `unmet dependencies` error comes from installing `opendistroforelasticsearch` with a version number that is not the same as the version of the packages used with the `dpkg` command. This issue is [detailed on GitHub](https://github.com/opendistro/for-elasticsearch-docs/issues/99#issuecomment-511573544).
+
+The information in this article might do well here: “[How to uninstall a .deb package?](https://askubuntu.com/questions/22200/how-to-uninstall-a-deb-package)
+”
+
 @[BryanWilhite](https://twitter.com/BryanWilhite)
