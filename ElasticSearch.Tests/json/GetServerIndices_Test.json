@@ -1,9 +1,21 @@
 {
   "input": {
-    "uri": "http://localhost:9200/_cat/indices?pretty",
+    "uri": "http://localhost:9200/_cat/indices?format=json&pretty=true",
     "body": {}
   },
   "output": [
+    {
+      "health": "yellow",
+      "status": "open",
+      "index": "customer",
+      "uuid": "c_yV-M1SQEGw31JtXkwyhg",
+      "pri": "1",
+      "rep": "1",
+      "docs.count": "1",
+      "docs.deleted": "0",
+      "store.size": "3.5kb",
+      "pri.store.size": "3.5kb"
+    },
     {
       "health": "green",
       "status": "open",

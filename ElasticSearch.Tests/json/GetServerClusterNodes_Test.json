@@ -1,17 +1,17 @@
 {
   "input": {
-    "uri": "http://localhost:9200/_cat/nodes?pretty",
+    "uri": "http://localhost:9200/_cat/nodes?format=json&pretty=true",
     "body": {}
   },
   "output": [
     {
       "ip": "127.0.0.1",
-      "heap.percent": "10",
-      "ram.percent": "97",
-      "cpu": "41",
+      "heap.percent": "7",
+      "ram.percent": "99",
+      "cpu": "29",
       "load_1m": "0.80",
-      "load_5m": "0.77",
-      "load_15m": "0.74",
+      "load_5m": "0.67",
+      "load_15m": "0.64",
       "node.role": "mdi",
       "master": "*",
       "name": "bw-ubuntu-vm"

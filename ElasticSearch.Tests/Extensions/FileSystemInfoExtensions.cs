@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Songhay.Extensions;
@@ -12,7 +11,7 @@ namespace ElasticSearch.Tests.Extensions
 {
     public static class FileSystemInfoExtensions
     {
-        public static async Task<JObject> GetServerResponseWithJsonAcceptHeaderAsync(this FileSystemInfo ioFile)
+        public static async Task<JContainer> GetServerResponseWithJsonAcceptHeaderAsync(this FileSystemInfo ioFile)
         {
             return await ioFile.ReturnServerResponseAsync(
                 HttpMethod.Get,
@@ -30,12 +29,12 @@ namespace ElasticSearch.Tests.Extensions
             return JObject.Parse(json);
         }
 
-        public static async Task<JObject> ReturnServerResponseAsync(this FileSystemInfo ioFile, HttpMethod method)
+        public static async Task<JContainer> ReturnServerResponseAsync(this FileSystemInfo ioFile, HttpMethod method)
         {
             return await ioFile.ReturnServerResponseAsync(method, requestAction: null);
         }
 
-        public static async Task<JObject> ReturnServerResponseAsync(this FileSystemInfo ioFile, HttpMethod method, Action<HttpRequestMessage> requestAction)
+        public static async Task<JContainer> ReturnServerResponseAsync(this FileSystemInfo ioFile, HttpMethod method, Action<HttpRequestMessage> requestAction)
         {
             var j = ioFile.GetIoJObject();
             var j_input = (j["input"] as JObject);
@@ -44,12 +43,13 @@ namespace ElasticSearch.Tests.Extensions
             var request = new HttpRequestMessage(method, uri);
             requestAction?.Invoke(request);
             var response = await request.SendAsync();
-            j["output"] = JObject.Parse(await response.Content.ReadAsStringAsync());
+            var content = await response.Content.ReadAsStringAsync();
+            j["output"] = await response.ToJContainerAsync();
 
             return j;
         }
 
-        public static async Task<JObject> ReturnServerResponseFromBodyAsync(this FileSystemInfo ioFile, HttpMethod method)
+        public static async Task<JContainer> ReturnServerResponseFromBodyAsync(this FileSystemInfo ioFile, HttpMethod method)
         {
             var j = ioFile.GetIoJObject();
             var j_input = (j["input"] as JObject);
@@ -60,7 +60,7 @@ namespace ElasticSearch.Tests.Extensions
             var request = new HttpRequestMessage(method, uri);
             request.Headers.Clear();
             var response = await request.SendBodyAsync(body?.ToString());
-            j["output"] = JObject.Parse(await response.Content.ReadAsStringAsync());
+            j["output"] = await response.ToJContainerAsync();
 
             return j;
         }
