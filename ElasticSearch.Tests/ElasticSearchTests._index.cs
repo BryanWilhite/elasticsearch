@@ -13,7 +13,7 @@ namespace ElasticSearch.Tests
         /// DELETEs the customer index generated
         /// in <see cref="ElasticSearchTests.PutCustomerInNewIndex_Test(FileSystemInfo)"/>.
         /// </summary>
-        /// <param name="ioFile"></param>
+        /// <param name="ioFile">the <cref="FileSystemInfo" /></param>
         [Theory]
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\DeleteCustomerIndex_Test.json")]
         public async Task DeleteCustomerIndex_Test(FileSystemInfo ioFile)
@@ -26,7 +26,7 @@ namespace ElasticSearch.Tests
         /// DELETEs the customer index generated
         /// in <see cref="ElasticSearchTests.PostCustomerIndexCopy_Test(FileSystemInfo)"/>.
         /// </summary>
-        /// <param name="ioFile"></param>
+        /// <param name="ioFile">the <cref="FileSystemInfo" /></param>
         [Theory]
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\DeleteCustomerIndexCopy_Test.json")]
         public async Task DeleteCustomerIndexCopy_Test(FileSystemInfo ioFile)
@@ -38,7 +38,7 @@ namespace ElasticSearch.Tests
         /// <summary>
         /// GETs all the customer documents with <c>_search</c>.
         /// </summary>
-        /// <param name="ioFile"></param>
+        /// <param name="ioFile">the <cref="FileSystemInfo" /></param>
         [Theory]
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetAllCustomers.json")]
         public async Task GetAllCustomers_Test(FileSystemInfo ioFile)
@@ -51,7 +51,7 @@ namespace ElasticSearch.Tests
         /// GETs the customer index generated
         /// in <see cref="ElasticSearchTests.PutCustomerInNewIndex_Test(FileSystemInfo)"/>.
         /// </summary>
-        /// <param name="ioFile"></param>
+        /// <param name="ioFile">the <cref="FileSystemInfo" /></param>
         [Theory]
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\GetCustomerIndex_Test.json")]
         public async Task GetCustomerIndex_Test(FileSystemInfo ioFile)
@@ -65,7 +65,7 @@ namespace ElasticSearch.Tests
         /// in <see cref="ElasticSearchTests.PutCustomerInNewIndex_Test(FileSystemInfo)"/>.
         /// Depends on data from <see cref="ElasticSearchTests.PostCustomer_Test(FileSystemInfo)"/>.
         /// </summary>
-        /// <param name="ioFile"></param>
+        /// <param name="ioFile">the <cref="FileSystemInfo" /></param>
         /// <remarks>
         /// This operation will work as expected for POST or GET methods.
         /// This operation will work as expected for <c>customer/_search</c> or just <c>_search</c>.
@@ -85,7 +85,7 @@ namespace ElasticSearch.Tests
         /// POSTs a request for a copy of the index generated (with <c>_reindex</c>)
         /// in <see cref="ElasticSearchTests.PutCustomerInNewIndex_Test(FileSystemInfo)"/>.
         /// </summary>
-        /// <param name="ioFile"></param>
+        /// <param name="ioFile">the <cref="FileSystemInfo" /></param>
         [Theory]
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PostCustomerIndexCopy_Test.json")]
         public async Task PostCustomerIndexCopy_Test(FileSystemInfo ioFile)
@@ -97,7 +97,7 @@ namespace ElasticSearch.Tests
         /// <summary>
         /// PUTs a new customer in an index generated on the fly.
         /// </summary>
-        /// <param name="ioFile"></param>
+        /// <param name="ioFile">the <cref="FileSystemInfo" /></param>
         /// <remarks>
         /// Running this PUT repeatedly does not add multiple documents.
         /// This is because an ID is specified in the URI.
