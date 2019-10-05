@@ -5,20 +5,20 @@
   },
   "output": [
     {
-      "epoch": "1570225519",
-      "timestamp": "21:45:19",
+      "epoch": "1570234013",
+      "timestamp": "00:06:53",
       "cluster": "elasticsearch",
-      "status": "yellow",
+      "status": "green",
       "node.total": "1",
       "node.data": "1",
-      "shards": "2",
-      "pri": "2",
+      "shards": "1",
+      "pri": "1",
       "relo": "0",
       "init": "0",
-      "unassign": "1",
+      "unassign": "0",
       "pending_tasks": "0",
       "max_task_wait_time": "-",
-      "active_shards_percent": "66.7%"
+      "active_shards_percent": "100.0%"
     }
   ]
 }

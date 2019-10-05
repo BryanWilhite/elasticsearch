@@ -17,7 +17,7 @@ namespace ElasticSearch.Tests
         /// Running this POST repeatedly will add multiple documents with auto-generated IDs.
         /// </remarks>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PostCustomer_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\getting-started\json\PostCustomer_Test.json")]
         public async Task PostCustomer_Test(FileSystemInfo ioFile)
         {
             var j = await ioFile.ReturnServerResponseFromBodyAsync(HttpMethod.Post);
@@ -34,7 +34,7 @@ namespace ElasticSearch.Tests
         /// for the index to refresh after the update.
         /// </remarks>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PostCustomerById_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\getting-started\json\PostCustomerById_Test.json")]
         public async Task PostCustomerById_Test(FileSystemInfo ioFile)
         {
             var j = await ioFile.ReturnServerResponseFromBodyAsync(HttpMethod.Post);
@@ -48,7 +48,7 @@ namespace ElasticSearch.Tests
         /// </summary>
         /// <param name="ioFile">the <cref="FileSystemInfo" /></param>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PostCustomerPainlessById_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\getting-started\json\PostCustomerPainlessById_Test.json")]
         public async Task PostCustomerPainlessById_Test(FileSystemInfo ioFile)
         {
             var j = await ioFile.ReturnServerResponseFromBodyAsync(HttpMethod.Post);
@@ -66,7 +66,7 @@ namespace ElasticSearch.Tests
         /// for the index to refresh after the update.
         /// </remarks>
         [Theory]
-        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\json\PostCustomerUpdateByQuery_Test.json")]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\getting-started\json\PostCustomerUpdateByQuery_Test.json")]
         public async Task PostCustomerUpdateByQuery_Test(FileSystemInfo ioFile)
         {
             var j = await ioFile.ReturnServerResponseFromBodyAsync(HttpMethod.Post);
