@@ -7,8 +7,20 @@
     {
       "health": "yellow",
       "status": "open",
+      "index": "bank",
+      "uuid": "fEZPnqawTPC4RcrpA8QZQg",
+      "pri": "1",
+      "rep": "1",
+      "docs.count": "1000",
+      "docs.deleted": "0",
+      "store.size": "422.2kb",
+      "pri.store.size": "422.2kb"
+    },
+    {
+      "health": "yellow",
+      "status": "open",
       "index": "customer",
-      "uuid": "c_yV-M1SQEGw31JtXkwyhg",
+      "uuid": "UU9mdBYHRgWRYltn_TQO0g",
       "pri": "1",
       "rep": "1",
       "docs.count": "1",

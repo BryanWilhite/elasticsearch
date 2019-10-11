@@ -83,11 +83,6 @@ namespace ElasticSearch.Tests
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
 
-        /// <summary>
-        /// POSTs a request for a copy of the index generated (with <c>_reindex</c>)
-        /// in <see cref="ElasticSearchTests.PutCustomerInNewIndex_Test(FileSystemInfo)"/>.
-        /// </summary>
-        /// <param name="ioFile">the <cref="FileSystemInfo" /></param>
         [Theory]
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\getting-started\json\PostAccountsInBulk_Test.json",
         @"..\..\..\getting-started\json\accounts.json")]
@@ -116,14 +111,6 @@ namespace ElasticSearch.Tests
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
 
-        /// <summary>
-        /// PUTs a new customer in an index generated on the fly.
-        /// </summary>
-        /// <param name="ioFile">the <cref="FileSystemInfo" /></param>
-        /// <remarks>
-        /// Running this PUT repeatedly does not add multiple documents.
-        /// This is because an ID is specified in the URI.
-        /// </remarks>
         [Theory]
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\getting-started\json\PutCustomerInNewIndex_Test.json")]
         public async Task PutCustomerInNewIndex_Test(FileSystemInfo ioFile)
