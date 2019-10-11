@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Songhay.Extensions;
@@ -51,15 +52,24 @@ namespace ElasticSearch.Tests.Extensions
 
         public static async Task<JContainer> ReturnServerResponseFromBodyAsync(this FileSystemInfo ioFile, HttpMethod method)
         {
+            return await ioFile.ReturnServerResponseFromBodyAsync(method, MimeTypes.ApplicationJson);
+        }
+
+        public static async Task<JContainer> ReturnServerResponseFromBodyAsync(this FileSystemInfo ioFile, HttpMethod method, string mediaType)
+        {
             var j = ioFile.GetIoJObject();
-            var j_input = (j["input"] as JObject);
+            var j_input = j.GetJObject("input");
             var uri = j_input.GetJToken("uri", throwException: true).Value<string>();
 
-            var body = JObject.FromObject(j_input["body"]);
+            var body = (mediaType == MimeTypes.ApplicationJson) ?
+                j_input.GetJObject("body")?.ToString()
+                :
+                j_input.GetValue<string>("body")
+                ;
 
             var request = new HttpRequestMessage(method, uri);
             request.Headers.Clear();
-            var response = await request.SendBodyAsync(body?.ToString());
+            var response = await request.SendBodyAsync(body, Encoding.UTF8, mediaType);
             j["output"] = await response.ToJContainerAsync();
 
             return j;

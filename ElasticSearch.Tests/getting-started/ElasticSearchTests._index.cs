@@ -106,7 +106,7 @@ namespace ElasticSearch.Tests
         [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\getting-started\json\PutCustomerInNewIndex_Test.json")]
         public async Task PutCustomerInNewIndex_Test(FileSystemInfo ioFile)
         {
-            var j = await ioFile.ReturnServerResponseAsync(HttpMethod.Put);
+            var j = await ioFile.ReturnServerResponseFromBodyAsync(HttpMethod.Put);
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
     }
