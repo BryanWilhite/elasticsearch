@@ -38,8 +38,8 @@ namespace ElasticSearch.Tests.Extensions
         public static async Task<JContainer> ReturnServerResponseAsync(this FileSystemInfo ioFile, HttpMethod method, Action<HttpRequestMessage> requestAction)
         {
             var j = ioFile.GetIoJObject();
-            var j_input = (j["input"] as JObject);
-            var uri = j_input.GetJToken("uri", throwException: true).Value<string>();
+            var j_input = j.GetJObject("input");
+            var uri = j_input.GetValue<string>("uri");
 
             var request = new HttpRequestMessage(method, uri);
             requestAction?.Invoke(request);
@@ -52,24 +52,22 @@ namespace ElasticSearch.Tests.Extensions
 
         public static async Task<JContainer> ReturnServerResponseFromBodyAsync(this FileSystemInfo ioFile, HttpMethod method)
         {
-            return await ioFile.ReturnServerResponseFromBodyAsync(method, MimeTypes.ApplicationJson);
+            return await ioFile.ReturnServerResponseFromBodyAsync(method, ioJObjectHandler: null);
         }
 
-        public static async Task<JContainer> ReturnServerResponseFromBodyAsync(this FileSystemInfo ioFile, HttpMethod method, string mediaType)
+        public static async Task<JContainer> ReturnServerResponseFromBodyAsync(this FileSystemInfo ioFile, HttpMethod method, Action<JObject> ioJObjectHandler)
         {
             var j = ioFile.GetIoJObject();
-            var j_input = j.GetJObject("input");
-            var uri = j_input.GetJToken("uri", throwException: true).Value<string>();
+            ioJObjectHandler?.Invoke(j);
 
-            var body = (mediaType == MimeTypes.ApplicationJson) ?
-                j_input.GetJObject("body")?.ToString()
-                :
-                j_input.GetValue<string>("body")
-                ;
+            var j_input = j.GetJObject("input");
+            var uri = j_input.GetValue<string>("uri");
+
+            var body = j.GetValue<string>("body");
 
             var request = new HttpRequestMessage(method, uri);
             request.Headers.Clear();
-            var response = await request.SendBodyAsync(body, Encoding.UTF8, mediaType);
+            var response = await request.SendBodyAsync(body, Encoding.UTF8, MimeTypes.ApplicationJson);
             j["output"] = await response.ToJContainerAsync();
 
             return j;

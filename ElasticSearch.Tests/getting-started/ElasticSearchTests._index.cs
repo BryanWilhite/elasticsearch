@@ -1,4 +1,6 @@
 using ElasticSearch.Tests.Extensions;
+using Newtonsoft.Json.Linq;
+using Songhay.Models;
 using Songhay.Tests;
 using System.IO;
 using System.Net.Http;
@@ -78,6 +80,26 @@ namespace ElasticSearch.Tests
         public async Task GetCustomersByQuery(FileSystemInfo ioFile)
         {
             var j = await ioFile.ReturnServerResponseFromBodyAsync(HttpMethod.Get);
+            File.WriteAllText(ioFile.FullName, j.ToString());
+        }
+
+        /// <summary>
+        /// POSTs a request for a copy of the index generated (with <c>_reindex</c>)
+        /// in <see cref="ElasticSearchTests.PutCustomerInNewIndex_Test(FileSystemInfo)"/>.
+        /// </summary>
+        /// <param name="ioFile">the <cref="FileSystemInfo" /></param>
+        [Theory]
+        [ProjectFileData(typeof(ElasticSearchTests), @"..\..\..\getting-started\json\PostAccountsInBulk_Test.json",
+        @"..\..\..\getting-started\json\accounts.json")]
+        public async Task PostAccountsInBulk_Test(FileSystemInfo ioFile, FileSystemInfo accountsFile)
+        {
+            var j = await ioFile.ReturnServerResponseFromBodyAsync(HttpMethod.Post,
+                jO => jO["body"] = File.ReadAllText(accountsFile.FullName));
+
+            j["body"] = JObject.FromObject(
+                new { message = $"see the `{accountsFile.Name}` file in this folder" }
+            );
+
             File.WriteAllText(ioFile.FullName, j.ToString());
         }
 
