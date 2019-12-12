@@ -94,6 +94,32 @@
                 ]
             },
             "problemMatcher": []
+        },
+        {
+            "label": "elasticsearch: start",
+            "type": "shell",
+            "linux": {
+                "command": "sudo",
+                "args": [
+                    "/etc/init.d/elasticsearch",
+                    "start"
+                ]
+            },
+            "windows": {},
+            "problemMatcher": []
+        },
+        {
+            "label": "elasticsearch: stop",
+            "type": "shell",
+            "linux": {
+                "command": "sudo",
+                "args": [
+                    "/etc/init.d/elasticsearch",
+                    "stop"
+                ]
+            },
+            "windows": {},
+            "problemMatcher": []
         }
     ]
 }
